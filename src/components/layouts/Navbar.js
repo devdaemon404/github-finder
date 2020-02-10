@@ -6,10 +6,10 @@ import { Button } from "react-bootstrap";
 const Navbar = ({ icon, title }) => {
     return (
         <nav className="navbar navbar-dark bg-dark">
-            <a className="navbar-brand" href="/">
+            <Link className="navbar-brand" to="/">
                 <i className={icon} />
                 {' ' + title}
-            </a>
+            </Link>
             <ul className="nav">
                 <li className="nav-item">
                     <Link to="/">

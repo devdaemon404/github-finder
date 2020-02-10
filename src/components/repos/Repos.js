@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types'
-import RepoItem from './RepoItem' 
+import RepoItem from './RepoItem'
 
 const Repos = ({ repos }) => {
     return (
-        repos.map(repo => <RepoItem repo={repo} key={repo.id} />)
+        repos.map(repo => (
+            <Fragment key={repo.id}>
+                <RepoItem repo={repo} />
+                <br />
+            </Fragment>
+        ))
     )
 }
 
 Repos.propTypes = {
-    repos:PropTypes.array.isRequired,
+    repos: PropTypes.array.isRequired,
 }
 export default Repos;
