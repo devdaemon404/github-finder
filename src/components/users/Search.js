@@ -1,56 +1,42 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types'
+import React, { useState, Fragment, useContext } from 'react';
+import GithubContext from '../../context/github/githubContext';
+import AlertContext from '../../context/alert/alertContext';
 
-
-class Search extends Component {
-    state = {
-        text: ''
-    };
-
-    static propTypes = {
-        searchUsers: PropTypes.func.isRequired,
-        clearUsers: PropTypes.func.isRequired,
-        showClear: PropTypes.bool.isRequired,
-        setAlert: PropTypes.func.isRequired,
+const Search = () => {
+    const githubContext = useContext(GithubContext);
+    const alertContext = useContext(AlertContext);
+    const { setAlert } = alertContext;
+    const [text, setText] = useState('');
+    const onChange = (e) => {
+        setText(e.target.value)
     }
-    onChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value })
-    }
-    onSubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-        if (this.state.text === '') {
-            this.props.setAlert('Please enter something', 'dark')
+        if (text === '') {
+            setAlert('Please enter something', 'dark')
         } else {
-            this.props.searchUsers(this.state.text);
-            this.setState({ text: '' })
+            githubContext.searchUsers(text);
+            setText('');
         }
-
     }
-
-    render() {
-        const { showClear, clearUsers } = this.props;
-        return (
-
-            <Fragment>
-                <form onSubmit={this.onSubmit} className="input-group md-form form-sm form-2 pl-0" style={{ marginTop: "10px", marginBottom: "10px" }}>
-                    <input
-                        className="form-control my-0 py-1 lime-border"
-                        name="text"
-                        type="text"
-                        placeholder="Search users..."
-                        value={this.state.text}
-                        onChange={this.onChange}
-                    />
-                    <button style={{ marginLeft: "5px" }} type="submit" className="btn btn-dark mb-2">Search</button>
-                    {showClear && (
-                        <div style={{ marginLeft: "5px" }} onClick={clearUsers} className="btn btn-dark mb-2">Clear</div>
-                    )}
-
-                </form>
-            </Fragment>
-
-        )
-    }
+    return (
+        <Fragment>
+            <form onSubmit={onSubmit} className="input-group md-form form-sm form-2 pl-0" style={{ marginTop: "10px", marginBottom: "10px" }}>
+                <input
+                    className="form-control my-0 py-1 lime-border"
+                    name="text"
+                    type="text"
+                    placeholder="Search users..."
+                    value={text}
+                    onChange={onChange}
+                />
+                <button style={{ marginLeft: "5px" }} type="submit" className="btn btn-dark mb-2">Search</button>
+                {githubContext.users.length > 0 && (
+                    <div style={{ marginLeft: "5px" }} onClick={githubContext.clearUsers} className="btn btn-dark mb-2">Clear</div>
+                )}
+            </form>
+        </Fragment>
+    )
 }
 
 export default Search

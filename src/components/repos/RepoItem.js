@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const RepoItem = ({ repo }) => {
     return (
-        <div className="card card-body">
+        <div className="card card-body border-dark">
             <h3>
                 <a className="card-link" href={repo.html_url}>{repo.name}</a>
             </h3>
