@@ -59,11 +59,11 @@ const User = ({ match }) => {
             </div>
             <br />
             <div className="card border-dark">
-                <div className="row card-body mx-auto">
-                    <span className="badge badge-primary">Followers: {followers}</span>
-                    <span className="badge badge-danger ml-2">Following: {following}</span>
-                    <span className="badge badge-success ml-2">Public Repos: {public_repos}</span>
-                    <span className="badge badge-dark ml-2">Public Gists: {public_gists}</span>
+                <div className="card-body text-center">
+                    <span className="badge badge-primary mx-2">Followers: {followers}</span>
+                    <span className="badge badge-danger mx-2">Following: {following}</span>
+                    <span className="badge badge-success mx-2">Public Repos: {public_repos}</span>
+                    <span className="badge badge-dark mx-2">Public Gists: {public_gists}</span>
                 </div>
             </div>
             <br />
