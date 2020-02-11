@@ -7,7 +7,7 @@ const Users = () => {
     const githubContext = useContext(GithubContext);
     const { loading, users } = githubContext;
     return !loading && users !== null ? (
-        <div className='row'>
+        <div className='row justify-content-center'>
             {users.map(user => (
                 <UserItem key={user.id} user={user} />
             ))}
